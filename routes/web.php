@@ -29,5 +29,5 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/notes', function () {
-    return Inertia::render('Notes');
+    return Inertia::render('Notes/Notes');
 })->name('notes');
