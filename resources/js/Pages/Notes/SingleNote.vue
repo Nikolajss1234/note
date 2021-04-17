@@ -33,14 +33,10 @@ export default {
     created() {
         this.submitText = debounce(this.submitText, 1000);
     },
-    data() {
-        return {
-            text: '',
-        }
-    },
     components: {
         JetButton,
     },
+    props: ['text'],
     methods: {
         onInput(e) {
             this.text = e.target.innerText;

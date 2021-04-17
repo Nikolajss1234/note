@@ -16,13 +16,7 @@
                 </div>
 
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg notes-list py-6">
-                    {{ notes }}
-                    <!--                    <single-note></single-note>-->
-                    <!--                    <single-note></single-note>-->
-                    <!--                    <single-note></single-note>-->
-                    <!--                    <single-note></single-note>-->
-                    <!--                    <single-note></single-note>-->
-                    <!--                    <single-note></single-note>-->
+                    <single-note v-for="note in allNotes" :text="note.text"></single-note>
                 </div>
             </div>
         </div>
@@ -60,14 +54,17 @@ import axios from "axios";
 export default {
     data() {
         return {
-            form: this.$inertia.form()
+            allNotes: [],
         }
+    },
+    mounted() {
+        this.allNotes = this.notes;
     },
     methods: {
         addNote() {
             axios.post(route('notes.create'))
                 .then(response => {
-                    console.log(response);
+                    this.allNotes.push(response.data.note);
                 }).catch(e => console.error(e));
         }
     },

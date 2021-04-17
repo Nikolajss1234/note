@@ -18830,13 +18830,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      form: this.$inertia.form()
+      allNotes: []
     };
+  },
+  mounted: function mounted() {
+    this.allNotes = this.notes;
   },
   methods: {
     addNote: function addNote() {
+      var _this = this;
+
       axios__WEBPACK_IMPORTED_MODULE_3___default().post(route('notes.create')).then(function (response) {
-        console.log(response);
+        _this.allNotes.push(response.data.note);
       })["catch"](function (e) {
         return console.error(e);
       });
@@ -18872,14 +18877,10 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     this.submitText = debounce__WEBPACK_IMPORTED_MODULE_1___default()(this.submitText, 1000);
   },
-  data: function data() {
-    return {
-      text: ''
-    };
-  },
   components: {
     JetButton: _Jetstream_Button__WEBPACK_IMPORTED_MODULE_0__.default
   },
+  props: ['text'],
   methods: {
     onInput: function onInput(e) {
       this.text = e.target.innerText;
@@ -22750,6 +22751,8 @@ var _hoisted_6 = {
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_jet_button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("jet-button");
 
+  var _component_single_note = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("single-note");
+
   var _component_app_layout = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("app-layout");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_app_layout, null, {
@@ -22769,9 +22772,15 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
       }, 8
       /* PROPS */
-      , ["onClick"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.notes), 1
-      /* TEXT */
-      ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    <single-note></single-note>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    <single-note></single-note>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    <single-note></single-note>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    <single-note></single-note>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    <single-note></single-note>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    <single-note></single-note>")])])])];
+      , ["onClick"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_6, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.allNotes, function (note) {
+        return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_single_note, {
+          text: note.text
+        }, null, 8
+        /* PROPS */
+        , ["text"]);
+      }), 256
+      /* UNKEYED_FRAGMENT */
+      ))])])])];
     }),
     _: 1
     /* STABLE */
@@ -22815,7 +22824,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return $options.onInput && $options.onInput.apply($options, arguments);
     }),
     "data-placeholder": "Write Here..."
-  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.text), 33
+  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.text), 33
   /* TEXT, HYDRATE_EVENTS */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_button, {
     "class": "bg-red-700 mx-2",
