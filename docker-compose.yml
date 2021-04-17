@@ -1,0 +1,103 @@
+version: '3'
+services:
+
+  #PHP Service
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: bgeek.io/php
+    container_name: app
+    restart: unless-stopped
+    tty: true
+    environment:
+      SERVICE_NAME: app
+      SERVICE_TAGS: dev
+      APP_NAME: Laravel
+      APP_ENV: local
+      APP_KEY: base64:SFULgdCly/3aGdjxOX9XeAFhAQ3OZVHClZvCB0rVClo=
+      APP_DEBUG: "true"
+      APP_URL: http://localhost
+      LOG_CHANNEL: stack
+      DB_CONNECTION: mysql
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_DATABASE: laravel
+      DB_USERNAME: root
+      DB_PASSWORD: laravel_password
+      BROADCAST_DRIVER: log
+      CACHE_DRIVER: file
+      QUEUE_CONNECTION: sync
+      SESSION_DRIVER: file
+      SESSION_LIFETIME: 120
+      REDIS_HOST: 127.0.0.1
+      REDIS_PASSWORD: null
+      REDIS_PORT: 6379
+      MAIL_MAILER: smtp
+      MAIL_HOST: smtp.mailtrap.io
+      MAIL_PORT: 2525
+      MAIL_USERNAME: null
+      MAIL_PASSWORD: null
+      MAIL_ENCRYPTION: null
+      MAIL_FROM_ADDRESS: null
+      MAIL_FROM_NAME: "${APP_NAME}"
+      AWS_ACCESS_KEY_ID: 'BZCUV3TY3LN7SLB5V5V2'
+      AWS_SECRET_ACCESS_KEY: 'pciU5fnBOfBtGHwBZsiu4BY+f7MW7kFwNGJCzOXpvoY'
+      AWS_DEFAULT_REGION: 'FRA1'
+      AWS_BUCKET: 'mystoryplace'
+      PUSHER_APP_ID:
+      PUSHER_APP_KEY:
+      PUSHER_APP_SECRET:
+      PUSHER_APP_CLUSTER: mt1
+      MIX_PUSHER_APP_KEY: "${PUSHER_APP_KEY}"
+      MIX_PUSHER_APP_CLUSTER: "${PUSHER_APP_CLUSTER}"
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+      - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini
+    networks:
+      - app-network
+
+  #Nginx Service
+  webserver:
+    image: nginx:alpine
+    container_name: webserver
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./:/var/www
+      - ./nginx/conf.d/:/etc/nginx/conf.d/
+    networks:
+      - app-network
+
+  #MySQL Service
+  db:
+    image: mysql:8
+    container_name: db
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: laravel
+      MYSQL_ROOT_PASSWORD: laravel_password
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    volumes:
+      - dbdata:/var/lib/mysql/
+      - ./mysql/my.cnf:/etc/mysql/my.cnf
+    networks:
+      - app-network
+
+
+#Docker Networks
+networks:
+  app-network:
+    driver: bridge
+#Volumes
+volumes:
+  dbdata:
+    driver: local
