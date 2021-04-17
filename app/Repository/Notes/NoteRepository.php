@@ -43,7 +43,6 @@ class NoteRepository
         return $note->save();
     }
 
-
     /**
      * @param Note $note
      * @param User $user
@@ -56,7 +55,6 @@ class NoteRepository
         }
 
         return $note->delete();
-
     }
 
 }

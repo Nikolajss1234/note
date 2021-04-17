@@ -55,7 +55,7 @@ class NoteController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function update(Note $note, Request $request): JsonResponse
+    public function update(Note $note, Request $request): JsonResponse // TODO custom request
     {
         return response()->json(
             $this->noteRepository->updateNote(
