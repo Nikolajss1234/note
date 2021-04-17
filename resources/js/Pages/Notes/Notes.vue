@@ -16,7 +16,7 @@
                 </div>
 
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg notes-list py-6">
-                    <single-note v-for="note in allNotes" :text="note.text"></single-note>
+                    <single-note v-for="note in allNotes" :note="note"></single-note>
                 </div>
             </div>
         </div>

@@ -50,6 +50,11 @@ Route::group(
             '/',
             'NoteController@create'
         )->name('notes.create');
+
+        Route::put(
+            '/{note}',
+            'NoteController@update'
+        )->name('notes.update');
     }
 );
 

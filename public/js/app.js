@@ -18871,6 +18871,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Jetstream_Button__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Jetstream/Button */ "./resources/js/Jetstream/Button.vue");
 /* harmony import */ var debounce__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! debounce */ "./node_modules/debounce/index.js");
 /* harmony import */ var debounce__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(debounce__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -18880,14 +18883,18 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     JetButton: _Jetstream_Button__WEBPACK_IMPORTED_MODULE_0__.default
   },
-  props: ['text'],
+  props: ['note'],
   methods: {
     onInput: function onInput(e) {
-      this.text = e.target.innerText;
+      this.note.text = e.target.innerText;
       this.submitText();
     },
     submitText: function submitText() {
-      console.log('Submit: ' + this.text);
+      axios__WEBPACK_IMPORTED_MODULE_2___default().put(route('notes.update', {
+        note: this.note.id
+      }), {
+        text: this.note.text
+      });
     },
     deleteNote: function deleteNote() {
       alert('DELETE');
@@ -22774,10 +22781,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       /* PROPS */
       , ["onClick"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_6, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.allNotes, function (note) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_single_note, {
-          text: note.text
+          note: note
         }, null, 8
         /* PROPS */
-        , ["text"]);
+        , ["note"]);
       }), 256
       /* UNKEYED_FRAGMENT */
       ))])])])];
@@ -22824,7 +22831,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return $options.onInput && $options.onInput.apply($options, arguments);
     }),
     "data-placeholder": "Write Here..."
-  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.text), 33
+  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.note.text), 33
   /* TEXT, HYDRATE_EVENTS */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_button, {
     "class": "bg-red-700 mx-2",

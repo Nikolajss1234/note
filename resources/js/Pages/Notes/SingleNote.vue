@@ -2,7 +2,7 @@
 
     <div class="max-w-lg w-full rounded-lg shadow-lg p-4 mt-2 mx-2 bg-yellow-200">
         <p contenteditable="true" class="text-gray-500 my-1 w-full"
-           @input="onInput" data-placeholder="Write Here...">{{ text }}</p>
+           @input="onInput" data-placeholder="Write Here...">{{ note.text }}</p>
         <div class="mt-2 flex justify-end">
 
             <jet-button class="bg-red-700 mx-2" @click="deleteNote">
@@ -28,6 +28,7 @@ p:empty:not(:focus)::before {
 <script>
 import JetButton from '@/Jetstream/Button';
 import debounce from 'debounce';
+import axios from 'axios';
 
 export default {
     created() {
@@ -36,14 +37,14 @@ export default {
     components: {
         JetButton,
     },
-    props: ['text'],
+    props: ['note'],
     methods: {
         onInput(e) {
-            this.text = e.target.innerText;
+            this.note.text = e.target.innerText;
             this.submitText();
         },
         submitText() {
-            console.log('Submit: ' + this.text);
+            axios.put(route('notes.update', {note: this.note.id}), {text: this.note.text})
         },
         deleteNote() {
             alert('DELETE');
