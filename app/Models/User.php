@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -65,6 +66,14 @@ class User extends Authenticatable
     public function notes(): HasMany
     {
         return $this->hasMany(Note::class);
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function notesFromSharing(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'notes_sharing', 'note_id', 'user_id');
     }
 
 }
