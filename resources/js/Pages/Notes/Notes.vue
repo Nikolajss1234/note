@@ -8,6 +8,11 @@
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+
+                <div class="notes-top-row">
+                    <jet-button class="mb-3 bg-red-700 plus-button px-6 py-6">+</jet-button>
+                </div>
+
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg notes-list py-6">
                     {{ notes }}
                     <!--                    <single-note></single-note>-->
@@ -29,16 +34,31 @@
     justify-content: center;
     flex-wrap: wrap;
 }
+
+.notes-top-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 22pt;
+}
+
+.plus-button {
+    font-size: 36px;
+}
+
 </style>
 
 <script>
 import AppLayout from '@/Layouts/AppLayout';
 import SingleNote from '@/Pages/Notes/SingleNote';
+import JetButton from '@/Jetstream/Button';
 
 export default {
     components: {
         AppLayout,
-        SingleNote
+        SingleNote,
+        JetButton,
     },
     props: ['notes'],
 }
