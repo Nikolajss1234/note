@@ -18841,7 +18841,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios__WEBPACK_IMPORTED_MODULE_3___default().post(route('notes.create')).then(function (response) {
-        _this.allNotes.push(response.data.note);
+        _this.allNotes.unshift(response.data.note);
       })["catch"](function (e) {
         return console.error(e);
       });

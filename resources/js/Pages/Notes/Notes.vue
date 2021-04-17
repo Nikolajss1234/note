@@ -64,7 +64,7 @@ export default {
         addNote() {
             axios.post(route('notes.create'))
                 .then(response => {
-                    this.allNotes.push(response.data.note);
+                    this.allNotes.unshift(response.data.note);
                 }).catch(e => console.error(e));
         },
         removeDeletedNote(id) {
