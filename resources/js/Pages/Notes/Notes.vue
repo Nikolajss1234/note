@@ -16,7 +16,7 @@
                 </div>
 
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg notes-list py-6">
-                    <single-note v-for="note in allNotes" :note="note"></single-note>
+                    <single-note v-for="note in allNotes" :note="note" @noteDeleted="removeDeletedNote"></single-note>
                 </div>
             </div>
         </div>
@@ -66,6 +66,12 @@ export default {
                 .then(response => {
                     this.allNotes.push(response.data.note);
                 }).catch(e => console.error(e));
+        },
+        removeDeletedNote(id) {
+            console.log(id);
+            this.allNotes = this.allNotes.filter((note) => {
+                return note.id !== id;
+            })
         }
     },
     components: {

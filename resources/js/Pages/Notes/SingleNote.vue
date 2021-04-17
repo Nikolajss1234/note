@@ -45,9 +45,16 @@ export default {
         },
         submitText() {
             axios.put(route('notes.update', {note: this.note.id}), {text: this.note.text})
+                .catch(e => console.error(e));
         },
         deleteNote() {
-            alert('DELETE');
+            axios.delete(route('notes.delete', {note: this.note.id}))
+                .then(response => {
+                    if (response.data) {
+                        this.$emit('noteDeleted', this.note.id);
+                    }
+                })
+                .catch(e => console.error(e));
         },
         share() {
             alert('SHARE');

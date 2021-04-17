@@ -45,4 +45,20 @@ class NoteRepository
         return true;
     }
 
+
+    /**
+     * @param Note $note
+     * @param User $user
+     * @return bool
+     */
+    public function deleteNote(Note $note, User $user): bool
+    {
+        if ($note->user->id != $user->id) {
+            return false;
+        }
+
+        return $note->delete();
+
+    }
+
 }

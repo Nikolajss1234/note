@@ -18845,6 +18845,12 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (e) {
         return console.error(e);
       });
+    },
+    removeDeletedNote: function removeDeletedNote(id) {
+      console.log(id);
+      this.allNotes = this.allNotes.filter(function (note) {
+        return note.id !== id;
+      });
     }
   },
   components: {
@@ -18894,10 +18900,22 @@ __webpack_require__.r(__webpack_exports__);
         note: this.note.id
       }), {
         text: this.note.text
+      })["catch"](function (e) {
+        return console.error(e);
       });
     },
     deleteNote: function deleteNote() {
-      alert('DELETE');
+      var _this = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_2___default().delete(route('notes.delete', {
+        note: this.note.id
+      })).then(function (response) {
+        if (response.data) {
+          _this.$emit('noteDeleted', _this.note.id);
+        }
+      })["catch"](function (e) {
+        return console.error(e);
+      });
     },
     share: function share() {
       alert('SHARE');
@@ -22781,10 +22799,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       /* PROPS */
       , ["onClick"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_6, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.allNotes, function (note) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_single_note, {
-          note: note
+          note: note,
+          onNoteDeleted: $options.removeDeletedNote
         }, null, 8
         /* PROPS */
-        , ["note"]);
+        , ["note", "onNoteDeleted"]);
       }), 256
       /* UNKEYED_FRAGMENT */
       ))])])])];

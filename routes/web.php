@@ -55,6 +55,11 @@ Route::group(
             '/{note}',
             'NoteController@update'
         )->name('notes.update');
+
+        Route::delete(
+            '/{note}',
+            'NoteController@delete'
+        )->name('notes.delete');
     }
 );
 

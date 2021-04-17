@@ -66,4 +66,19 @@ class NoteController extends Controller
         );
     }
 
+    /**
+     * @param Note $note
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function delete(Note $note, Request $request): JsonResponse
+    {
+        return response()->json(
+            $this->noteRepository->deleteNote(
+                $note,
+                auth()->user(),
+            )
+        );
+    }
+
 }
