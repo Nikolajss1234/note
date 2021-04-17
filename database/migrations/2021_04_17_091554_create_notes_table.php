@@ -18,8 +18,10 @@ class CreateNotesTable extends Migration
             function (Blueprint $table) {
                 $table->id();
                 $table->unsignedBigInteger('user_id');
-                $table->text('text');
+                $table->text('text')->nullable();
                 $table->timestamps();
+
+                $table->foreign('user_id')->references('id')->on('users');
             }
         );
     }

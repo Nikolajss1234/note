@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web\Notes;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -23,4 +24,17 @@ class NoteController extends Controller
             ]
         );
     }
+
+
+    /**
+     * @return RedirectResponse
+     */
+    public function create(): RedirectResponse
+    {
+        dd('aaaaaaaaa');
+
+
+
+    }
+
 }
