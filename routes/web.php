@@ -37,18 +37,19 @@ Route::middleware(['auth:sanctum', 'verified'])->get(
     }
 )->name('dashboard');
 
+
 Route::group(
-    ['namespace' => 'Web'],
+    ['namespace' => 'Notes', 'prefix' => 'notes', 'middleware' => ['auth:sanctum', 'verified']],
     function () {
-        Route::group(
-            ['namespace' => 'Notes', 'prefix' => 'notes'],
-            function () {
-                Route::middleware(['auth:sanctum', 'verified'])->get(
-                    '/',
-                    'NoteController@index'
-                )->name('notes');
-            }
-        );
+        Route::get(
+            '/',
+            'NoteController@index'
+        )->name('notes');
+
+        Route::post(
+            '/',
+            'NoteController@create'
+        )->name('notes.create');
     }
 );
 

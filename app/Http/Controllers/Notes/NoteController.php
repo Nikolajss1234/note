@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Web\Notes;
+namespace App\Http\Controllers\Notes;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\RedirectResponse;
+use App\Repository\Notes\NoteRepository;
+use Illuminate\Http\JsonResponse;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -11,11 +12,25 @@ class NoteController extends Controller
 {
 
     /**
+     * @var NoteRepository
+     */
+    private $noteRepository;
+
+    /**
+     * NoteController constructor.
+     * @param NoteRepository $noteRepository
+     */
+    public function __construct(NoteRepository $noteRepository)
+    {
+        $this->noteRepository = $noteRepository;
+    }
+
+    /**
      * @return Response
      */
     public function index(): Response
     {
-        $notes = auth()->user()->notes;
+        $notes = $this->noteRepository->getUserNotes(auth()->user());
 
         return Inertia::render(
             'Notes/Notes',
@@ -25,16 +40,12 @@ class NoteController extends Controller
         );
     }
 
-
     /**
-     * @return RedirectResponse
+     * @return JsonResponse
      */
-    public function create(): RedirectResponse
+    public function create(): JsonResponse
     {
-        dd('aaaaaaaaa');
-
-
-
+        return response()->json(['note' => $this->noteRepository->createNote(auth()->user())]);
     }
 
 }

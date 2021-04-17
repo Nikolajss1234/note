@@ -10,7 +10,9 @@
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
                 <div class="notes-top-row">
-                    <jet-button class="mb-3 bg-red-700 plus-button px-6 py-6">+</jet-button>
+                    <jet-button class="mb-3 bg-red-700 plus-button px-6 py-6"
+                                @click="addNote">+
+                    </jet-button>
                 </div>
 
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg notes-list py-6">
@@ -53,8 +55,22 @@
 import AppLayout from '@/Layouts/AppLayout';
 import SingleNote from '@/Pages/Notes/SingleNote';
 import JetButton from '@/Jetstream/Button';
+import axios from "axios";
 
 export default {
+    data() {
+        return {
+            form: this.$inertia.form()
+        }
+    },
+    methods: {
+        addNote() {
+            axios.post(route('notes.create'))
+                .then(response => {
+                    console.log(response);
+                }).catch(e => console.error(e));
+        }
+    },
     components: {
         AppLayout,
         SingleNote,

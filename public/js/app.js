@@ -18821,10 +18821,27 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Layouts/AppLayout */ "./resources/js/Layouts/AppLayout.vue");
 /* harmony import */ var _Pages_Notes_SingleNote__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Pages/Notes/SingleNote */ "./resources/js/Pages/Notes/SingleNote.vue");
 /* harmony import */ var _Jetstream_Button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Jetstream/Button */ "./resources/js/Jetstream/Button.vue");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
+
 
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      form: this.$inertia.form()
+    };
+  },
+  methods: {
+    addNote: function addNote() {
+      axios__WEBPACK_IMPORTED_MODULE_3___default().post(route('notes.create')).then(function (response) {
+        console.log(response);
+      })["catch"](function (e) {
+        return console.error(e);
+      });
+    }
+  },
   components: {
     AppLayout: _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__.default,
     SingleNote: _Pages_Notes_SingleNote__WEBPACK_IMPORTED_MODULE_1__.default,
@@ -22725,7 +22742,7 @@ var _hoisted_4 = {
   "class": "notes-top-row"
 };
 
-var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("+");
+var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("+ ");
 
 var _hoisted_6 = {
   "class": "bg-white overflow-hidden shadow-xl sm:rounded-lg notes-list py-6"
@@ -22741,7 +22758,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }),
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_button, {
-        "class": "mb-3 bg-red-700 plus-button px-6 py-6"
+        "class": "mb-3 bg-red-700 plus-button px-6 py-6",
+        onClick: $options.addNote
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [_hoisted_5];
@@ -22749,7 +22767,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         _: 1
         /* STABLE */
 
-      })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.notes), 1
+      }, 8
+      /* PROPS */
+      , ["onClick"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.notes), 1
       /* TEXT */
       ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    <single-note></single-note>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    <single-note></single-note>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    <single-note></single-note>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    <single-note></single-note>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    <single-note></single-note>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    <single-note></single-note>")])])])];
     }),
