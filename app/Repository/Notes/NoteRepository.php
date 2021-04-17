@@ -40,9 +40,7 @@ class NoteRepository
         }
 
         $note->text = $text;
-        $note->save();
-
-        return true;
+        return $note->save();
     }
 
 

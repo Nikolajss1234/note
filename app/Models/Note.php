@@ -14,10 +14,7 @@ class Note extends Model
      *
      * @var array
      */
-    protected $fillable = [
-        'user_id',
-        'text',
-    ];
+    protected $fillable = ['text'];
 
     /**
      * @return BelongsTo
