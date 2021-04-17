@@ -22718,7 +22718,7 @@ var _hoisted_3 = {
   "class": "max-w-7xl mx-auto sm:px-6 lg:px-8"
 };
 var _hoisted_4 = {
-  "class": "bg-white overflow-hidden shadow-xl sm:rounded-lg notes-list"
+  "class": "bg-white overflow-hidden shadow-xl sm:rounded-lg notes-list py-6"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_single_note = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("single-note");
