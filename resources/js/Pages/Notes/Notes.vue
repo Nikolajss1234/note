@@ -9,12 +9,13 @@
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg notes-list py-6">
-                    <single-note></single-note>
-                    <single-note></single-note>
-                    <single-note></single-note>
-                    <single-note></single-note>
-                    <single-note></single-note>
-                    <single-note></single-note>
+                    {{ notes }}
+                    <!--                    <single-note></single-note>-->
+                    <!--                    <single-note></single-note>-->
+                    <!--                    <single-note></single-note>-->
+                    <!--                    <single-note></single-note>-->
+                    <!--                    <single-note></single-note>-->
+                    <!--                    <single-note></single-note>-->
                 </div>
             </div>
         </div>
@@ -22,12 +23,12 @@
 </template>
 
 <style>
-    .notes-list{
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        flex-wrap: wrap;
-    }
+.notes-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+}
 </style>
 
 <script>
@@ -39,5 +40,6 @@ export default {
         AppLayout,
         SingleNote
     },
+    props: ['notes'],
 }
 </script>
