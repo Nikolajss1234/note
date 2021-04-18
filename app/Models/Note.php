@@ -29,7 +29,7 @@ class Note extends Model
      */
     public function comments(): HasMany
     {
-        return $this->hasMany(NoteComment::class);
+        return $this->hasMany(NoteComment::class)->orderBy('created_at', 'desc');
     }
 
 }
