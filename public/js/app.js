@@ -18876,41 +18876,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Layouts/AppLayout */ "./resources/js/Layouts/AppLayout.vue");
 /* harmony import */ var _Jetstream_Button__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Jetstream/Button */ "./resources/js/Jetstream/Button.vue");
-/* harmony import */ var debounce__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! debounce */ "./node_modules/debounce/index.js");
-/* harmony import */ var debounce__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(debounce__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _mixins_notes_mixin__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../mixins/notes_mixin */ "./resources/js/mixins/notes_mixin.js");
 
 
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  created: function created() {
-    this.submitText = debounce__WEBPACK_IMPORTED_MODULE_2___default()(this.submitText, 1000);
-  },
   components: {
     JetButton: _Jetstream_Button__WEBPACK_IMPORTED_MODULE_1__.default,
     AppLayout: _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__.default
   },
-  props: ['note'],
+  mixins: [_mixins_notes_mixin__WEBPACK_IMPORTED_MODULE_3__.default],
   methods: {
-    onInput: function onInput(e) {
-      this.note.text = e.target.innerText;
-      this.submitText();
-    },
-    submitText: function submitText() {
-      axios__WEBPACK_IMPORTED_MODULE_3___default().put(route('notes.update', {
-        note: this.note.id
-      }), {
-        text: this.note.text
-      })["catch"](function (e) {
-        return console.error(e);
-      });
-    },
     deleteNote: function deleteNote() {
       var _this = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_3___default().delete(route('notes.delete', {
+      axios__WEBPACK_IMPORTED_MODULE_2___default().delete(route('notes.delete', {
         note: this.note.id
       })).then(function (response) {
         if (response.data) {
@@ -18919,9 +18902,6 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (e) {
         return console.error(e);
       });
-    },
-    share: function share() {
-      alert('SHARE');
     }
   }
 });
@@ -18940,39 +18920,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _Jetstream_Button__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Jetstream/Button */ "./resources/js/Jetstream/Button.vue");
-/* harmony import */ var debounce__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! debounce */ "./node_modules/debounce/index.js");
-/* harmony import */ var debounce__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(debounce__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _mixins_notes_mixin__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../mixins/notes_mixin */ "./resources/js/mixins/notes_mixin.js");
 
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  created: function created() {
-    this.submitText = debounce__WEBPACK_IMPORTED_MODULE_1___default()(this.submitText, 1000);
-  },
   components: {
     JetButton: _Jetstream_Button__WEBPACK_IMPORTED_MODULE_0__.default
   },
-  props: ['note'],
+  mixins: [_mixins_notes_mixin__WEBPACK_IMPORTED_MODULE_2__.default],
   methods: {
-    onInput: function onInput(e) {
-      this.note.text = e.target.innerText;
-      this.submitText();
-    },
-    submitText: function submitText() {
-      axios__WEBPACK_IMPORTED_MODULE_2___default().put(route('notes.update', {
-        note: this.note.id
-      }), {
-        text: this.note.text
-      })["catch"](function (e) {
-        return console.error(e);
-      });
-    },
     deleteNote: function deleteNote() {
       var _this = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_2___default().delete(route('notes.delete', {
+      axios__WEBPACK_IMPORTED_MODULE_1___default().delete(route('notes.delete', {
         note: this.note.id
       })).then(function (response) {
         if (response.data) {
@@ -18981,9 +18944,6 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (e) {
         return console.error(e);
       });
-    },
-    share: function share() {
-      alert('SHARE');
     }
   }
 });
@@ -22942,10 +22902,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         contenteditable: "true",
         "class": "text-gray-500 my-1 w-full",
         onInput: _cache[1] || (_cache[1] = function () {
-          return $options.onInput && $options.onInput.apply($options, arguments);
+          return _ctx.onInput && _ctx.onInput.apply(_ctx, arguments);
         }),
         "data-placeholder": "Write Here..."
-      }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.note.text), 33
+      }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.note.text), 33
       /* TEXT, HYDRATE_EVENTS */
       )])])])];
     }),
@@ -22990,10 +22950,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     contenteditable: "true",
     "class": "text-gray-500 my-1 w-full",
     onInput: _cache[1] || (_cache[1] = function () {
-      return $options.onInput && $options.onInput.apply($options, arguments);
+      return _ctx.onInput && _ctx.onInput.apply(_ctx, arguments);
     }),
     "data-placeholder": "Write Here..."
-  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.note.text), 33
+  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.note.text), 33
   /* TEXT, HYDRATE_EVENTS */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_button, {
     "class": "bg-red-700 mx-2",
@@ -23009,7 +22969,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* PROPS */
   , ["onClick"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_inertia_link, {
     href: _ctx.route('notes.show', {
-      id: $props.note.id
+      id: _ctx.note.id
     })
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -24495,6 +24455,47 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/mixins/notes_mixin.js":
+/*!********************************************!*\
+  !*** ./resources/js/mixins/notes_mixin.js ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var debounce__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! debounce */ "./node_modules/debounce/index.js");
+/* harmony import */ var debounce__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(debounce__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  created: function created() {
+    this.submitText = debounce__WEBPACK_IMPORTED_MODULE_0___default()(this.submitText, 1000);
+  },
+  props: ['note'],
+  methods: {
+    onInput: function onInput(e) {
+      this.note.text = e.target.innerText;
+      this.submitText();
+    },
+    submitText: function submitText() {
+      axios__WEBPACK_IMPORTED_MODULE_1___default().put(route('notes.update', {
+        note: this.note.id
+      }), {
+        text: this.note.text
+      })["catch"](function (e) {
+        return console.error(e);
+      });
+    }
+  }
+});
 
 /***/ }),
 

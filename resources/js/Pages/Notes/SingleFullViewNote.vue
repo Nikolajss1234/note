@@ -46,27 +46,16 @@ p:empty:not(:focus)::before {
 <script>
 import AppLayout from '@/Layouts/AppLayout';
 import JetButton from '@/Jetstream/Button';
-import debounce from 'debounce';
 import axios from 'axios';
+import notes_mixin from "../../mixins/notes_mixin";
 
 export default {
-    created() {
-        this.submitText = debounce(this.submitText, 1000);
-    },
     components: {
         JetButton,
         AppLayout,
     },
-    props: ['note'],
+    mixins: [notes_mixin],
     methods: {
-        onInput(e) {
-            this.note.text = e.target.innerText;
-            this.submitText();
-        },
-        submitText() {
-            axios.put(route('notes.update', {note: this.note.id}), {text: this.note.text})
-                .catch(e => console.error(e));
-        },
         deleteNote() {
             axios.delete(route('notes.delete', {note: this.note.id}))
                 .then(response => {
@@ -76,9 +65,6 @@ export default {
                 })
                 .catch(e => console.error(e));
         },
-        share() {
-            alert('SHARE');
-        }
     },
 }
 </script>
