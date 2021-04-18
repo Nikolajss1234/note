@@ -27,12 +27,56 @@ class NoteControllerTest extends TestCase
      * @group Feature
      * @test
      */
-    public function test_return_right_view()
+    public function test_notes_view()
     {
         $this->actingAs($user = User::factory()->create());
 
         $response = $this->get(route('notes'));
         $response->assertStatus(200);
+    }
+
+    /**
+     * @group notes
+     * @group Feature
+     * @test
+     */
+    public function test_notes_single_view()
+    {
+        $this->actingAs($user = User::factory()->create());
+        $note = $user->notes()->create();
+
+        $response = $this->get(route('notes.show', ['id' => $note->id]));
+        $response->assertStatus(200);
+    }
+
+    /**
+     * @group notes
+     * @group Feature
+     * @test
+     */
+    public function test_notes_single_view_wrong_id()
+    {
+        $this->actingAs($user = User::factory()->create());
+        $note = $user->notes()->create();
+
+        $response = $this->get(route('notes.show', ['id' => $note->id + 1]));
+        $response->assertStatus(404);
+    }
+
+    /**
+     * @group notes
+     * @group Feature
+     * @test
+     */
+    public function test_notes_single_view_user_not_owner()
+    {
+        $user = User::factory()->create();
+        $note = $user->notes()->create();
+
+        $this->actingAs(User::factory()->create());
+
+        $response = $this->get(route('notes.show', ['id' => $note->id]));
+        $response->assertStatus(404);
     }
 
     /**
