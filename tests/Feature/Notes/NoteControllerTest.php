@@ -207,4 +207,70 @@ class NoteControllerTest extends TestCase
         $this->assertEquals(1, $user->notes()->count());
     }
 
+    /**
+     * @group notes
+     * @group Feature
+     * @test
+     */
+    public function test_note_comment_create_success()
+    {
+        $this->actingAs($user = User::factory()->create());
+        $note = $user->notes()->create();
+
+        $response = $this->post(route('notes.comments.create', ['id' => $note->id]), ['text' => 'test text']);
+        $response->assertStatus(200);
+
+        $this->assertEquals('test text', $note->comments()->first()->text);
+    }
+
+    /**
+     * @group notes
+     * @group Feature
+     * @test
+     */
+    public function test_note_comment_create_validation_text_not_string()
+    {
+        $this->actingAs($user = User::factory()->create());
+        $note = $user->notes()->create();
+
+        $response = $this->post(route('notes.comments.create', ['id' => $note->id]), ['text' => true]);
+        $response->assertStatus(302);
+
+        $this->assertEquals(0, $note->comments()->count());
+    }
+
+    /**
+     * @group notes
+     * @group Feature
+     * @test
+     */
+    public function test_note_comment_create_validation_no_text()
+    {
+        $this->actingAs($user = User::factory()->create());
+        $note = $user->notes()->create();
+
+        $response = $this->post(route('notes.comments.create', ['id' => $note->id]));
+        $response->assertStatus(302);
+
+        $this->assertEquals(0, $note->comments()->count());
+    }
+
+    /**
+     * @group notes
+     * @group Feature
+     * @test
+     */
+    public function test_note_comment_create_not_owner()
+    {
+        $user = User::factory()->create();
+        $note = $user->notes()->create();
+
+        $this->actingAs(User::factory()->create());
+
+        $response = $this->post(route('notes.comments.create', ['id' => $note->id]), ['text' => 'test text']);
+        $response->assertStatus(404);
+
+        $this->assertEquals(0, $note->comments()->count());
+    }
+
 }
