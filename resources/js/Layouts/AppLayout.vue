@@ -146,6 +146,9 @@
                         <jet-responsive-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
                             Dashboard
                         </jet-responsive-nav-link>
+                        <jet-responsive-nav-link :href="route('notes')" :active="route().current('notes')">
+                            Notes
+                        </jet-responsive-nav-link>
                     </div>
 
                     <!-- Responsive Settings Options -->
