@@ -7,7 +7,6 @@ use App\Http\Requests\NoteUpdateRequest;
 use App\Models\Note;
 use App\Repository\Notes\NoteRepository;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -39,6 +38,22 @@ class NoteController extends Controller
             'Notes/Notes',
             [
                 'notes' => $notes
+            ]
+        );
+    }
+
+    /**
+     * @param $id
+     * @return Response
+     */
+    public function show($id): Response
+    {
+        $note = $this->noteRepository->getUserSingleNote(auth()->user(), $id);
+
+        return Inertia::render(
+            'Notes/SingleFullViewNote',
+            [
+                'note' => $note
             ]
         );
     }

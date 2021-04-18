@@ -46,6 +46,11 @@ Route::group(
             'NoteController@index'
         )->name('notes');
 
+        Route::get(
+            '/{id}',
+            'NoteController@show'
+        )->name('notes.show');
+
         Route::post(
             '/',
             'NoteController@create'

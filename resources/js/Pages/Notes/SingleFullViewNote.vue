@@ -1,22 +1,32 @@
 <template>
 
-    <div class="max-w-lg w-full rounded-lg shadow-lg p-4 mt-2 mx-2 bg-yellow-200 note-single-view">
-        <p contenteditable="true" class="text-gray-500 my-1 w-full"
-           @input="onInput" data-placeholder="Write Here...">{{ note.text }}</p>
-        <div class="flex justify-end note-single-view-buttons">
+    <app-layout>
+        <template #header>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                Notes
+            </h2>
+        </template>
 
-            <jet-button class="bg-red-700 mx-2" @click="deleteNote">
-                delete
-            </jet-button>
+        <div class="py-12">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
-            <inertia-link :href="route('notes.show',{id:note.id})">
-                <jet-button class="bg-blue-400">
-                    comments
-                </jet-button>
-            </inertia-link>
+                <div class="flex justify-end">
 
+                    <jet-button class="bg-red-700 mx-0" @click="deleteNote">
+                        delete
+                    </jet-button>
+
+                </div>
+
+                <div class="w-full rounded-lg shadow-lg p-8 mt-2 mx-2 bg-yellow-200 note-single-full-view">
+                    <p contenteditable="true" class="text-gray-500 my-1 w-full"
+                       @input="onInput" data-placeholder="Write Here...">{{ note.text }}</p>
+                </div>
+
+            </div>
         </div>
-    </div>
+    </app-layout>
+
 
 </template>
 
@@ -26,19 +36,15 @@ p:empty:not(:focus)::before {
     cursor: text;
 }
 
-.note-single-view {
+.note-single-full-view {
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
-
-.note-single-view-buttons {
-    margin-top: auto;
-}
-
 </style>
 
 <script>
+import AppLayout from '@/Layouts/AppLayout';
 import JetButton from '@/Jetstream/Button';
 import debounce from 'debounce';
 import axios from 'axios';
@@ -49,6 +55,7 @@ export default {
     },
     components: {
         JetButton,
+        AppLayout,
     },
     props: ['note'],
     methods: {

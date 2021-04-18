@@ -4,7 +4,9 @@ namespace App\Repository\Notes;
 
 use App\Models\Note;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class NoteRepository
 {
@@ -16,6 +18,16 @@ class NoteRepository
     public function getUserNotes(User $user)
     {
         return $user->notes;
+    }
+
+    /**
+     * @param User $user
+     * @param $noteId
+     * @return Collection|Model|HasMany|HasMany[]|null
+     */
+    public function getUserSingleNote(User $user, $noteId)
+    {
+        return $user->notes()->findOrFail($noteId);
     }
 
     /**
