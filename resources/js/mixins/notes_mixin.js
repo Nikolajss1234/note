@@ -2,6 +2,11 @@ import debounce from "debounce";
 import axios from "axios";
 
 export default {
+    data() {
+        return {
+            placeholder: 'Click here to write...',
+        }
+    },
     created() {
         this.submitText = debounce(this.submitText, 1000);
     },

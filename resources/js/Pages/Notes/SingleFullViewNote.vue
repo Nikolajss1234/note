@@ -20,9 +20,8 @@
 
                 <div class="w-full rounded-lg shadow-lg p-8 mt-2 mx-2 bg-yellow-200 note-single-full-view">
                     <p contenteditable="true" class="text-gray-500 my-1 w-full"
-                       @input="onInput" data-placeholder="Write Here...">{{ note.text }}</p>
+                       @input="onInput" :data-placeholder="placeholder">{{ note.text }}</p>
                 </div>
-
 
                 <div class="note-comments-section mt-6 mx-6">
                     <div class="note-comments-form">

@@ -22949,10 +22949,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         onInput: _cache[1] || (_cache[1] = function () {
           return _ctx.onInput && _ctx.onInput.apply(_ctx, arguments);
         }),
-        "data-placeholder": "Write Here..."
-      }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.note.text), 33
-      /* TEXT, HYDRATE_EVENTS */
-      )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("textarea", {
+        "data-placeholder": _ctx.placeholder
+      }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.note.text), 41
+      /* TEXT, PROPS, HYDRATE_EVENTS */
+      , ["data-placeholder"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("textarea", {
         cols: "40",
         rows: "5",
         "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
@@ -23030,10 +23030,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onInput: _cache[1] || (_cache[1] = function () {
       return _ctx.onInput && _ctx.onInput.apply(_ctx, arguments);
     }),
-    "data-placeholder": "Write Here..."
-  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.note.text), 33
-  /* TEXT, HYDRATE_EVENTS */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_button, {
+    "data-placeholder": _ctx.placeholder
+  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.note.text), 41
+  /* TEXT, PROPS, HYDRATE_EVENTS */
+  , ["data-placeholder"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_button, {
     "class": "bg-red-700 mx-2",
     onClick: $options.deleteNote
   }, {
@@ -24554,6 +24554,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      placeholder: 'Click here to write...'
+    };
+  },
   created: function created() {
     this.submitText = debounce__WEBPACK_IMPORTED_MODULE_0___default()(this.submitText, 1000);
   },
