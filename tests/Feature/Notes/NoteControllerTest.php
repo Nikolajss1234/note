@@ -84,6 +84,38 @@ class NoteControllerTest extends TestCase
      * @group Feature
      * @test
      */
+    public function test_update_validation_no_text()
+    {
+        $this->actingAs($user = User::factory()->create());
+        $note = $user->notes()->create(['text' => 'test']);
+
+        $response = $this->put(route('notes.update', ['note' => $note->id]));
+        $response->assertStatus(302); // should be 422 but I use web routes
+
+        $this->assertEquals('test', $note->fresh()->text);
+    }
+
+    /**
+     * @group notes
+     * @group Feature
+     * @test
+     */
+    public function test_update_validation_text_not_string()
+    {
+        $this->actingAs($user = User::factory()->create());
+        $note = $user->notes()->create(['text' => 'test']);
+
+        $response = $this->put(route('notes.update', ['note' => $note->id], ['text' => 123]));
+        $response->assertStatus(302); // should be 422 but I use web routes
+
+        $this->assertEquals('test', $note->fresh()->text);
+    }
+
+    /**
+     * @group notes
+     * @group Feature
+     * @test
+     */
     public function test_update_not_owner()
     {
         $user = User::factory()->create();

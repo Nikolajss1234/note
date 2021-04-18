@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Notes;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\NoteUpdateRequest;
 use App\Models\Note;
 use App\Repository\Notes\NoteRepository;
 use Illuminate\Http\JsonResponse;
@@ -52,10 +53,10 @@ class NoteController extends Controller
 
     /**
      * @param Note $note
-     * @param Request $request
+     * @param NoteUpdateRequest $request
      * @return JsonResponse
      */
-    public function update(Note $note, Request $request): JsonResponse // TODO custom request
+    public function update(Note $note, NoteUpdateRequest $request): JsonResponse
     {
         return response()->json(
             $this->noteRepository->updateNote(
