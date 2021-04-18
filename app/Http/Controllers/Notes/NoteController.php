@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Notes;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\NoteCommentCreateRequest;
 use App\Http\Requests\NoteUpdateRequest;
 use App\Models\Note;
 use App\Repository\Notes\NoteRepository;
@@ -64,6 +65,18 @@ class NoteController extends Controller
     public function create(): JsonResponse
     {
         return response()->json(['note' => $this->noteRepository->createNote(auth()->user())]);
+    }
+
+    /**
+     * @param $noteId
+     * @param NoteCommentCreateRequest $request
+     * @return JsonResponse
+     */
+    public function createComment($noteId, NoteCommentCreateRequest $request): JsonResponse
+    {
+        return response()->json(
+            ['comment' => $this->noteRepository->createNoteComment($noteId, auth()->user(), $request->input('text'))]
+        );
     }
 
     /**

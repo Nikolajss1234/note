@@ -29,15 +29,17 @@
                         <textarea cols="40" rows="5" v-model.trim="commentText" class="w-full"
                                   placeholder="write comment here"></textarea>
 
-                        <jet-button class="bg-blue-400 m2-4 w-full justify-center">
+                        <jet-button class="bg-blue-400 m2-4 w-full justify-center"
+                                    @click="submitComment"
+                                    :disabled="!commentText.length">
                             submit
                         </jet-button>
                     </div>
 
                     <div class="note-comments-list mt-6 w-full">
-                        <div class="note-comment-single bg-gray-200 my-2 p-6">
-                            <p class="bg-gray-200 text-gray-500 self-end">bbbbbbbbbbbbbbbbbbbbbb</p>
-                            <p class="text-gray-900">aaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+                        <div class="note-comment-single bg-gray-200 my-2 p-6" v-for="comment in note.comments">
+                            <p class="bg-gray-200 text-gray-500 self-end">{{ comment.created_at }}</p>
+                            <p class="text-gray-900">{{ comment.text }}</p>
                         </div>
                     </div>
 
@@ -85,7 +87,7 @@ import notes_mixin from "../../mixins/notes_mixin";
 export default {
     data() {
         return {
-            commentText: [],
+            commentText: '',
         }
     },
     components: {
@@ -94,6 +96,17 @@ export default {
     },
     mixins: [notes_mixin],
     methods: {
+        submitComment() {
+            axios.post(route('notes.comments.create', {id: this.note.id}), {text: this.commentText})
+                .then(response => {
+                    const comment = response.data.comment;
+                    if (comment && comment.text) {
+                        this.note.comments.unshift(comment);
+                        this.commentText = '';
+                    }
+                })
+                .catch(e => console.error(e));
+        },
         deleteNote() {
             axios.delete(route('notes.delete', {note: this.note.id}))
                 .then(response => {

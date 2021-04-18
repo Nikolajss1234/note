@@ -65,6 +65,12 @@ Route::group(
             '/{note}',
             'NoteController@delete'
         )->name('notes.delete');
+
+        Route::post(
+            '/{id}/comments',
+            'NoteController@createComment'
+        )->name('notes.comments.create');
+
     }
 );
 

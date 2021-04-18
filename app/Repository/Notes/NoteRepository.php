@@ -27,7 +27,7 @@ class NoteRepository
      */
     public function getUserSingleNote(User $user, $noteId)
     {
-        return $user->notes()->findOrFail($noteId);
+        return $user->notes()->with('comments')->findOrFail($noteId);
     }
 
     /**
@@ -37,6 +37,20 @@ class NoteRepository
     public function createNote(User $user): Model
     {
         return $user->notes()->create();
+    }
+
+    /**
+     * @param $noteId
+     * @param User $user
+     * @param string $text
+     * @return Model
+     */
+    public function createNoteComment($noteId, User $user, string $text): Model
+    {
+        $note = $user->notes()->findOrFail($noteId);
+
+        return $note->comments()->create(['text' => $text]);
+
     }
 
     /**

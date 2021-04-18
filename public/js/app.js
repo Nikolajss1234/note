@@ -18886,7 +18886,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      commentText: []
+      commentText: ''
     };
   },
   components: {
@@ -18895,14 +18895,33 @@ __webpack_require__.r(__webpack_exports__);
   },
   mixins: [_mixins_notes_mixin__WEBPACK_IMPORTED_MODULE_3__.default],
   methods: {
-    deleteNote: function deleteNote() {
+    submitComment: function submitComment() {
       var _this = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_2___default().post(route('notes.comments.create', {
+        id: this.note.id
+      }), {
+        text: this.commentText
+      }).then(function (response) {
+        var comment = response.data.comment;
+
+        if (comment && comment.text) {
+          _this.note.comments.unshift(comment);
+
+          _this.commentText = '';
+        }
+      })["catch"](function (e) {
+        return console.error(e);
+      });
+    },
+    deleteNote: function deleteNote() {
+      var _this2 = this;
 
       axios__WEBPACK_IMPORTED_MODULE_2___default().delete(route('notes.delete', {
         note: this.note.id
       })).then(function (response) {
         if (response.data) {
-          _this.$inertia.get(route('notes'));
+          _this2.$inertia.get(route('notes'));
         }
       })["catch"](function (e) {
         return console.error(e);
@@ -22890,18 +22909,18 @@ var _hoisted_8 = {
 
 var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" submit ");
 
-var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+var _hoisted_10 = {
   "class": "note-comments-list mt-6 w-full"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+};
+var _hoisted_11 = {
   "class": "note-comment-single bg-gray-200 my-2 p-6"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", {
+};
+var _hoisted_12 = {
   "class": "bg-gray-200 text-gray-500 self-end"
-}, "bbbbbbbbbbbbbbbbbbbbbb"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", {
+};
+var _hoisted_13 = {
   "class": "text-gray-900"
-}, "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa")])], -1
-/* HOISTED */
-);
-
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_jet_button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("jet-button");
 
@@ -22946,7 +22965,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.commentText, void 0, {
         trim: true
       }]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_button, {
-        "class": "bg-blue-400 m2-4 w-full justify-center"
+        "class": "bg-blue-400 m2-4 w-full justify-center",
+        onClick: $options.submitComment,
+        disabled: !$data.commentText.length
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [_hoisted_9];
@@ -22954,7 +22975,17 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         _: 1
         /* STABLE */
 
-      })]), _hoisted_10])])])];
+      }, 8
+      /* PROPS */
+      , ["onClick", "disabled"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_10, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.note.comments, function (comment) {
+        return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", _hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(comment.created_at), 1
+        /* TEXT */
+        ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", _hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(comment.text), 1
+        /* TEXT */
+        )]);
+      }), 256
+      /* UNKEYED_FRAGMENT */
+      ))])])])])];
     }),
     _: 1
     /* STABLE */
