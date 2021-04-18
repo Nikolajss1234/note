@@ -18914,7 +18914,7 @@ __webpack_require__.r(__webpack_exports__);
         note: this.note.id
       })).then(function (response) {
         if (response.data) {
-          _this.$emit('noteDeleted', _this.note.id);
+          _this.$inertia.get(route('notes'));
         }
       })["catch"](function (e) {
         return console.error(e);

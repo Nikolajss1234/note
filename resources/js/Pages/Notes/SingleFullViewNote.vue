@@ -71,7 +71,7 @@ export default {
             axios.delete(route('notes.delete', {note: this.note.id}))
                 .then(response => {
                     if (response.data) {
-                        this.$emit('noteDeleted', this.note.id);
+                        this.$inertia.get(route('notes'));
                     }
                 })
                 .catch(e => console.error(e));
