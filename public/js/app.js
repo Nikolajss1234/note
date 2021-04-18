@@ -18884,6 +18884,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      commentText: []
+    };
+  },
   components: {
     JetButton: _Jetstream_Button__WEBPACK_IMPORTED_MODULE_1__.default,
     AppLayout: _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__.default
@@ -22876,6 +22881,27 @@ var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNod
 var _hoisted_6 = {
   "class": "w-full rounded-lg shadow-lg p-8 mt-2 mx-2 bg-yellow-200 note-single-full-view"
 };
+var _hoisted_7 = {
+  "class": "note-comments-section mt-6 mx-6"
+};
+var _hoisted_8 = {
+  "class": "note-comments-form"
+};
+
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" submit ");
+
+var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+  "class": "note-comments-list mt-6 w-full"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+  "class": "note-comment-single bg-gray-200 my-2 p-6"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", {
+  "class": "bg-gray-200 text-gray-500 self-end"
+}, "bbbbbbbbbbbbbbbbbbbbbb"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", {
+  "class": "text-gray-900"
+}, "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa")])], -1
+/* HOISTED */
+);
+
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_jet_button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("jet-button");
 
@@ -22907,7 +22933,28 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "data-placeholder": "Write Here..."
       }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.note.text), 33
       /* TEXT, HYDRATE_EVENTS */
-      )])])])];
+      )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("textarea", {
+        cols: "40",
+        rows: "5",
+        "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+          return $data.commentText = $event;
+        }),
+        "class": "w-full",
+        placeholder: "write comment here"
+      }, null, 512
+      /* NEED_PATCH */
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.commentText, void 0, {
+        trim: true
+      }]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_button, {
+        "class": "bg-blue-400 m2-4 w-full justify-center"
+      }, {
+        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+          return [_hoisted_9];
+        }),
+        _: 1
+        /* STABLE */
+
+      })]), _hoisted_10])])])];
     }),
     _: 1
     /* STABLE */
@@ -24624,7 +24671,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\np:empty:not(:focus)::before {\n    content: attr(data-placeholder);\n    cursor: text;\n}\n.note-single-full-view {\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.note-comments-section {\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n}\n.note-comment-single {\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n}\np:empty:not(:focus)::before {\n    content: attr(data-placeholder);\n    cursor: text;\n}\n.note-single-full-view {\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

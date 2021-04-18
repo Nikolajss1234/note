@@ -23,6 +23,26 @@
                        @input="onInput" data-placeholder="Write Here...">{{ note.text }}</p>
                 </div>
 
+
+                <div class="note-comments-section mt-6 mx-6">
+                    <div class="note-comments-form">
+                        <textarea cols="40" rows="5" v-model.trim="commentText" class="w-full"
+                                  placeholder="write comment here"></textarea>
+
+                        <jet-button class="bg-blue-400 m2-4 w-full justify-center">
+                            submit
+                        </jet-button>
+                    </div>
+
+                    <div class="note-comments-list mt-6 w-full">
+                        <div class="note-comment-single bg-gray-200 my-2 p-6">
+                            <p class="bg-gray-200 text-gray-500 self-end">bbbbbbbbbbbbbbbbbbbbbb</p>
+                            <p class="text-gray-900">aaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+                        </div>
+                    </div>
+
+                </div>
+
             </div>
         </div>
     </app-layout>
@@ -31,6 +51,19 @@
 </template>
 
 <style>
+.note-comments-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.note-comment-single {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 p:empty:not(:focus)::before {
     content: attr(data-placeholder);
     cursor: text;
@@ -50,6 +83,11 @@ import axios from 'axios';
 import notes_mixin from "../../mixins/notes_mixin";
 
 export default {
+    data() {
+        return {
+            commentText: [],
+        }
+    },
     components: {
         JetButton,
         AppLayout,
